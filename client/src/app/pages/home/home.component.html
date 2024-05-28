@@ -1,0 +1,64 @@
+<div class="flex flex-col min-h-screen m-0">
+  <app-navbar></app-navbar>
+
+  <div class="flex-1">
+    <div class="w-full h-2/4 relative">
+      <img
+        src="https://i.pinimg.com/originals/67/18/22/671822c2f63dd5f65d8fd15c9710420b.jpg"
+        alt=""
+        srcset=""
+        class="h-banner brightness-50 object-cover"
+      />
+
+      <div class="absolute top-2/4 left-2/4 -translate-x-2/4">
+        <p class="text-white text-3xl uppercase font-medium">
+          Chào mừng bạn đến với bookstore
+        </p>
+      </div>
+    </div>
+
+    <div class="w-4/5 m-auto my-10">
+      <p class="text-purple-600 text-center text-2xl uppercase font-medium">
+        Danh mục sản phẩm
+      </p>
+
+      <div class="flex gap-12 justify-center my-5">
+        @for (v of categories; track $index) {
+        <a
+          href="/shop?p=1&category={{ v.id }}"
+          class="flex flex-col gap-2 items-center justify-start hover:scale-150 transition ease-in-out"
+        >
+          <img
+            src="http://localhost:7200/api/images/{{ v.img }}"
+            alt=""
+            class="w-14 h-14"
+          />
+          <p>{{ v.name }}</p>
+        </a>
+        }
+      </div>
+    </div>
+
+    <div class="w-4/5 m-auto my-10 flex flex-col gap-20">
+      @for (v of categoryProduct; track $index) {
+      <div>
+        <p
+          class="text-purple-600 text-center text-2xl uppercase font-medium my-5"
+        >
+          {{ v.name }}
+        </p>
+
+        <swiper-container slides-per-view="5" navigation="true" loop="true">
+          @for (p of v.product; track $index) {
+          <swiper-slide>
+            <app-card-product [data]="p"></app-card-product>
+          </swiper-slide>
+          }
+        </swiper-container>
+      </div>
+      }
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,72 @@
+<div
+  class="w-full h-screen fixed top-0 left-0 black-rgba flex justify-center items-center"
+>
+  <form
+    action=""
+    method="post"
+    class="w-2/5 p-3 bg-white rounded-lg"
+    #form="ngForm"
+    (ngSubmit)="onSubmit(form)"
+  >
+    <div class="flex justify-between items-center">
+      <p class="text-lg font-medium">Đánh giá sản phẩm</p>
+      <i
+        class="fa-solid fa-xmark text-2xl cursor-pointer"
+        (click)="closeWriteReview()"
+      ></i>
+    </div>
+
+    <div class="flex my-10 flex-col gap-4">
+      <p class="text-3xl flex gap-3 m-auto">
+        <i
+          class="fa-solid fa-star text-gray-200 cursor-pointer"
+          #star
+          (click)="handleStarOption(1)"
+        ></i>
+        <i
+          class="fa-solid fa-star text-gray-200 cursor-pointer"
+          #star
+          (click)="handleStarOption(2)"
+        ></i>
+        <i
+          class="fa-solid fa-star text-gray-200 cursor-pointer"
+          #star
+          (click)="handleStarOption(3)"
+        ></i>
+        <i
+          class="fa-solid fa-star text-gray-200 cursor-pointer"
+          #star
+          (click)="handleStarOption(4)"
+        ></i>
+        <i
+          class="fa-solid fa-star text-gray-200 cursor-pointer"
+          (click)="handleStarOption(5)"
+          #star
+        ></i>
+      </p>
+    </div>
+
+    <textarea
+      name="content"
+      cols="30"
+      rows="4"
+      class="border border-gray-400 w-full focus:outline-none p-3 rounded-lg"
+      placeholder="Xin mời bạn chia sẻ một số cảm nhận về sản phẩm (nhập tối thiểu 15 ký tự)"
+      ngModel
+      required
+      minlength="15"
+    ></textarea>
+
+    <input type="hidden" name="star" [ngModel]="st" required />
+
+    <button
+      type="submit"
+      [disabled]="!form.valid && true"
+      class="bg-purple-600 text-white p-3 w-full mt-5 rounded-lg uppercase font-medium {{
+        !form.valid && 'opacity-60'
+      }}"
+    >
+      Gửi đánh giá
+    </button>
+  </form>
+</div>

@@ -1,0 +1,33 @@
+<div class="w-full bg-purple-600 h-14 flex items-center">
+  <div class="w-4/5 m-auto grid grid-cols-3">
+    <div class="flex items-center">
+      <a href="" class="flex">
+        <p class="bg-pink-600 py-2 px-2 text-white font-medium rounded-tr-2xl">
+          Book
+        </p>
+        <p class="bg-white py-2 px-2 rounded-tl-2xl">Store</p>
+      </a>
+    </div>
+
+    <div class="flex justify-center items-center">
+      <ul class="flex gap-10 text-white uppercase font-medium">
+        <li><a href="">Trang chủ</a></li>
+        <li><a href="shop?p=1">Sản phẩm</a></li>
+      </ul>
+    </div>
+
+    <div class="flex justify-end gap-7 text-white">
+      <button (click)="handleSearch()">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+
+      <button (click)="handleCart()">
+        <i class="fa-solid fa-cart-shopping"></i>
+      </button>
+
+      <button (click)="handleUser()">
+        <i class="fa-solid fa-user"></i>
+      </button>
+    </div>
+  </div>
+</div>

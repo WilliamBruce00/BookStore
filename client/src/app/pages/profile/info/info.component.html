@@ -1,0 +1,24 @@
+<div>
+  <p
+    class="text-purple-600 text-2xl font-medium uppercase border-b-2 border-purple-600"
+  >
+    Thông tin tài khoản
+  </p>
+
+  <ul class="my-2 flex flex-col gap-4">
+    <li class="flex">
+      <p class="w-1/4 font-medium">ID:</p>
+      <p>{{ user && user.id }}</p>
+    </li>
+
+    <li class="flex">
+      <p class="w-1/4 font-medium">Email:</p>
+      <p>{{ user && user.email }}</p>
+    </li>
+
+    <li class="flex">
+      <p class="w-1/4 font-medium">Mật khẩu:</p>
+      <p>*******</p>
+    </li>
+  </ul>
+</div>

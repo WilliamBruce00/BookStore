@@ -1,0 +1,16 @@
+<div>
+  <img
+    src="http://localhost:7200/api/images/{{ data.img }}"
+    alt=""
+    class="object-cover h-48 m-auto"
+  />
+
+  <p
+    class="truncate overflow-hidden w-3/5 m-auto my-2 text-sm hover:underline hover:text-purple-600"
+  >
+    <a href="details/{{ data.id }}">{{ data.name }}</a>
+  </p>
+  <p class="text-center text-red-600 font-medium text-xl">
+    {{ data.price | numberFormat }} đ
+  </p>
+</div>

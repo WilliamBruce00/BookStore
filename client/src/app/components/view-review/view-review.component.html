@@ -1,0 +1,45 @@
+<div
+  class="w-full h-screen fixed top-0 left-0 black-rgba flex justify-center items-center p-6"
+>
+  <div class="w-2/4 bg-white h-full p-6 rounded-lg flex flex-col">
+    <div
+      class="flex justify-between items-center border-b-2 border-gray-500 py-2"
+    >
+      <p class="text-lg font-medium">Đánh giá sản phẩm</p>
+      <i
+        class="fa-solid fa-xmark text-2xl cursor-pointer"
+        (click)="closeViewReview()"
+      ></i>
+    </div>
+
+    <div class="my-2 flex-grow overflow-auto">
+      @if (!reviews) {
+      <p class="text-center text-xl font-medium my-20">Không có đánh giá nào</p>
+      } @for (v of reviews; track $index) {
+      <div class="flex gap-3">
+        <div class="w-1/4">
+          <p class="font-medium flex-wrap">{{ v.email }}</p>
+          <small class="text-gray-600">{{
+            v.createAt | dateFormant : "dd/mm/yyyy"
+          }}</small>
+        </div>
+        <div class="w-3/4">
+          <p class="text-xs my-2">
+            @for (star of [1,2,3,4,5]; track $index) {
+            <i
+              class="fa-solid fa-star {{
+                $index < v.star ? 'text-yellow-400' : 'text-gray-300'
+              }}"
+            ></i>
+            }
+          </p>
+
+          <p class="my-2 min-h-16">
+            {{ v.content }}
+          </p>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

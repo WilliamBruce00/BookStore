@@ -1,0 +1,170 @@
+<div class="flex flex-col min-h-screen m-0">
+  <app-navbar></app-navbar>
+  <div class="flex-1">
+    @if (!cart) {
+    <div class="w-4/5 m-auto flex justify-center my-10 flex-col gap-6">
+      <p class="text-2xl font-medium text-center">
+        Không có sản phẩm nào trong giỏ hàng
+      </p>
+      <button
+        class="w-1/5 m-auto bg-purple-600 text-white py-2 px-6 rounded-lg"
+      >
+        <a href="">Quay lại trang chủ</a>
+      </button>
+    </div>
+    } @else {
+    <div class="w-4/5 m-auto py-8">
+      <div class="container mx-auto px-4">
+        <h1 class="text-2xl font-semibold mb-4">Giỏ hàng</h1>
+        <div class="flex flex-col md:flex-row gap-4">
+          <div class="md:w-3/4">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-4">
+              <table class="w-full">
+                <thead>
+                  <tr>
+                    <th class="text-left font-semibold">Sản phẩm</th>
+                    <th class="text-left font-semibold">Giá</th>
+                    <th class="text-left font-semibold">Số lượng</th>
+                    <th class="text-left font-semibold">Tổng tiền</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- More product rows -->
+                  @for (v of cart; track $index) {
+                  <tr>
+                    <td class="py-4">
+                      <div class="flex items-center">
+                        <img
+                          class="h-16 w-16 mr-4"
+                          src="http://localhost:7200/api/images/{{ v.img }}"
+                          alt="Product image"
+                        />
+                        <span class="font-semibold">{{ v.name }}</span>
+                      </div>
+                    </td>
+                    <td class="py-4 font-medium">
+                      {{ v.price | numberFormat }}đ
+                    </td>
+                    <td class="py-4">
+                      <div class="flex items-center">
+                        <button
+                          class="border rounded-md py-2 px-4 mr-2"
+                          (click)="decrease(quantity, v.cartID)"
+                        >
+                          -
+                        </button>
+                        <span class="text-center w-8" #quantity>{{
+                          v.quantity
+                        }}</span>
+                        <button
+                          class="border rounded-md py-2 px-4 ml-2"
+                          (click)="increase(quantity, v.cartID)"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </td>
+                    <td class="py-4">
+                      {{ v.price * v.quantity | numberFormat }}đ
+                    </td>
+
+                    <td class="py-4">
+                      <i
+                        class="fa-solid fa-trash-can text-red-600 cursor-pointer"
+                        (click)="removeCart(v.cartID)"
+                      ></i>
+                    </td>
+                  </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="md:w-1/4">
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h2 class="text-lg font-semibold mb-4 uppercase text-purple-600">
+                Thông tin thanh toán
+              </h2>
+              <div class="flex justify-between mb-2">
+                <span>Tổng</span>
+                <span>{{ total | numberFormat }}đ</span>
+              </div>
+              <div class="flex justify-between mb-2">
+                <span>Phí vận chuyển</span>
+                <span>0đ</span>
+              </div>
+              <div class="flex justify-between mb-2">
+                <span class="font-semibold">Thành tiền</span>
+                <span class="font-semibold">{{ total | numberFormat }}đ</span>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h2 class="text-lg font-semibold mb-4 uppercase text-purple-600">
+                Thông tin khách hàng
+              </h2>
+              <form
+                action=""
+                method="post"
+                class="flex flex-col gap-4"
+                #form="ngForm"
+                (ngSubmit)="onSubmit(form)"
+              >
+                <div>
+                  <p class="font-medium">Họ và tên</p>
+                  <input
+                    type="text"
+                    name="fullname"
+                    ngModel
+                    required
+                    class="w-full border-2 border-gray-200 h-10 pl-2 focus:outline-none rounded-lg"
+                  />
+                </div>
+
+                <div>
+                  <p class="font-medium">Số điện thoại</p>
+                  <input
+                    type="text"
+                    name="phone"
+                    ngModel
+                    required
+                    pattern="(09|03|08|07|05)[0-9]{8}"
+                    class="w-full border-2 border-gray-200 h-10 pl-2 focus:outline-none rounded-lg {{form.controls['phone'] &&
+                    form.controls['phone'].errors?.['pattern'] && 'border-red-300'}}"
+                  />
+
+                  @if (form.controls['phone'] &&
+                  form.controls['phone'].errors?.['pattern']) {
+                  <small class="text-red-600">Số điện thoại không hợp lệ</small>
+                  }
+                </div>
+
+                <div>
+                  <p class="font-medium">Địa chỉ nhà</p>
+                  <input
+                    type="text"
+                    name="address"
+                    ngModel
+                    required
+                    class="w-full border-2 border-gray-200 h-10 pl-2 focus:outline-none rounded-lg"
+                  />
+                </div>
+
+                <button
+                  [disabled]="!form.valid && true"
+                  class="bg-purple-600 text-white py-2 px-4 rounded-lg mt-4 w-full {{
+                    !form.valid && 'opacity-60'
+                  }}"
+                >
+                  Đặt hàng
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  <app-footer></app-footer>
+</div>

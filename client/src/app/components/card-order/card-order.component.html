@@ -1,0 +1,60 @@
+<div class="w-full flex my-5 border-2 border-gray-200 h-72">
+  <div class="w-[400px] bg-gray-100 p-5 flex flex-col gap-4">
+    <div>
+      <p class="text-gray-600">Mã đơn hàng</p>
+      <p class="font-medium">#{{ data.id }}</p>
+    </div>
+    <div>
+      <p class="text-gray-600">Ngày đặt</p>
+      <p class="font-medium">
+        {{ data.createAt | dateFormant : "dd/mm/yyyy" }}
+      </p>
+    </div>
+    <div>
+      <p class="text-gray-600">Tổng tiền</p>
+      <p class="font-medium">{{ data.total | numberFormat }}đ</p>
+    </div>
+    <div>
+      <p class="text-gray-600">Trạng thái</p>
+      <div class="flex items-center gap-2">
+        @switch (data.status) { @case ('Đang xử lý') {
+        <i class="fa-solid fa-circle text-xs text-red-600"></i>
+        } @case ('Đang thực hiện') {
+        <i class="fa-solid fa-circle text-xs text-yellow-600"></i>
+
+        } @default {
+        <i class="fa-solid fa-circle text-xs text-green-600"></i>
+        } }
+        <p class="font-medium">{{ data.status }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="w-full overflow-auto">
+    <table class="w-full">
+      <thead class="bg-purple-600 text-white">
+        <tr>
+          <th class="w-[110px] p-2">Hình ảnh</th>
+          <th class="p-2 w-[250px]">Tên sản phẩm</th>
+          <th class="w-[100px] p-2">Số lượng</th>
+          <th class="p-2">Giá</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (d of data.details; track $index) {
+        <tr>
+          <th class="p-2">
+            <img
+              src="http://localhost:7200/api/images/{{ d.img }}"
+              alt=""
+              class="w-28 h-24 m-auto"
+            />
+          </th>
+          <th>{{ d.name }}</th>
+          <th>{{ d.quantity }}</th>
+          <th>{{ d.price | numberFormat }}</th>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

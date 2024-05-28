@@ -1,0 +1,88 @@
+<div class="flex flex-col min-h-screen m-0">
+  <app-navbar></app-navbar>
+
+  <div class="flex-1">
+    <div class="w-4/5 m-auto my-2 flex">
+      <div class="w-1/4">
+        <div>
+          <p
+            class="text-purple-600 uppercase font-medium text-lg border-b-2 border-purple-600 my-2"
+          >
+            Danh mục sản phẩm
+          </p>
+
+          <ul class="flex w-full flex-col">
+            @for (v of categories; track $index) {
+            <li
+              class="h-11"
+              [class.bg-purple-600]="isActive('category=' + v.id)"
+              [class.text-white]="isActive('category=' + v.id)"
+            >
+              <a
+                routerLink="/shop"
+                (click)="setCategoryQueryParam(v.id)"
+                class="block leading-10 pl-3"
+                >{{ v.name }}</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+
+        <div>
+          <p
+            class="text-purple-600 uppercase font-medium text-lg border-b-2 border-purple-600 my-2"
+          >
+            Giá
+          </p>
+
+          <ul class="flex w-full flex-col">
+            @for (v of filterPrice; track $index) {
+            <li
+              class="h-11"
+              [class.bg-purple-600]="isActive('price=' + v)"
+              [class.text-white]="isActive('price=' + v)"
+            >
+              <a
+                routerLink="/shop"
+                (click)="setPriceQueryParam(v)"
+                class="block leading-10 pl-3"
+                >{{ v[0] === 0 ? v[0] : (v[0] | numberFormat) }}đ -
+                {{ v[1] ? (v[1] | numberFormat) + "đ" : "Trở lên" }}</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+      </div>
+      <div class="w-3/4">
+        @if (products && products.length === 0) {
+        <div class="w-full">
+          <p class="text-center text-xl my-10 font-medium">
+            Không có sản phẩm nào
+          </p>
+        </div>
+        } @else {
+        <div class="grid grid-cols-4 gap-5 my-10">
+          @for (v of products; track $index) {
+          <app-card-product [data]="v"></app-card-product>
+          }
+        </div>
+
+        }
+
+        <div class="w-full flex justify-center">
+          <button
+            class="bg-purple-600 text-white py-2 px-7 rounded-lg my-4"
+            #viewmore
+            (click)="viewMore(viewmore)"
+          >
+            Xem thêm sản phẩm
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>

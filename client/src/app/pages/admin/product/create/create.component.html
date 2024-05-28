@@ -1,0 +1,186 @@
+<div
+  class="max-w-lg border-2 border-gray-400 mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+>
+  <form
+    class="py-4 px-6"
+    action=""
+    method="POST"
+    #form="ngForm"
+    (ngSubmit)="onSubmit(form)"
+  >
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="name">
+        Tên sản phẩm
+      </label>
+      <input
+        [class.border-red-600]="form.controls['name'] && form.controls['name'].errors?.['required'] && form.controls['name'].dirty"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        type="text"
+        name="name"
+        ngModel
+        required
+      />
+
+      @if(form.controls['name'] && form.controls['name'].errors?.['required'] &&
+      form.controls['name'].dirty) {
+      <small class="text-red-600">Đây là thông tin bắt buộc</small>
+      }
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="price">
+        Giá
+      </label>
+      <input
+        [class.border-red-600]="form.controls['price'] && form.controls['price'].dirty && (form.controls['price'].errors?.['required'] || form.controls['price'].errors?.['pattern'])"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        type="text"
+        ngModel
+        name="price"
+        required
+        pattern="[0-9]+"
+      />
+
+      @if(form.controls['price'] && form.controls['price'].errors?.['required']
+      && form.controls['price'].dirty) {
+      <small class="text-red-600">Đây là thông tin bắt buộc</small>
+      } @else if (form.controls['price'] &&
+      form.controls['price'].errors?.['pattern'] &&
+      form.controls['price'].dirty) {
+      <small class="text-red-600">Vui lòng nhập số</small>
+      }
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="auchor">
+        Tác giả
+      </label>
+      <input
+        [class.border-red-600]="form.controls['auchor'] && form.controls['auchor'].errors?.['required'] && form.controls['auchor'].dirty"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        type="text"
+        ngModel
+        name="auchor"
+        required
+      />
+
+      @if(form.controls['auchor'] &&
+      form.controls['auchor'].errors?.['required'] &&
+      form.controls['auchor'].dirty) {
+      <small class="text-red-600">Đây là thông tin bắt buộc</small>
+      }
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="weight">
+        Trọng lượng
+      </label>
+      <input
+        [class.border-red-600]="form.controls['weight'] && form.controls['weight'].errors?.['required'] && form.controls['weight'].dirty"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        type="text"
+        ngModel
+        name="weight"
+        required
+      />
+
+      @if(form.controls['weight'] &&
+      form.controls['weight'].errors?.['required'] &&
+      form.controls['weight'].dirty) {
+      <small class="text-red-600">Đây là thông tin bắt buộc</small>
+      }
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="page">
+        Số trang
+      </label>
+      <input
+        [class.border-red-600]="form.controls['page'] && form.controls['page'].dirty && (form.controls['page'].errors?.['required'] || form.controls['page'].errors?.['pattern'])"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        type="text"
+        ngModel
+        required
+        name="page"
+        pattern="[0-9]+"
+      />
+
+      @if(form.controls['page'] && form.controls['page'].errors?.['required'] &&
+      form.controls['page'].dirty) {
+      <small class="text-red-600">Đây là thông tin bắt buộc</small>
+      } @else if (form.controls['page'] &&
+      form.controls['page'].errors?.['pattern'] && form.controls['page'].dirty)
+      {
+      <small class="text-red-600">Vui lòng nhập số</small>
+      }
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="size">
+        Kích thước
+      </label>
+      <input
+        [class.border-red-600]="form.controls['size'] && form.controls['size'].errors?.['required'] && form.controls['size'].dirty"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        type="text"
+        required
+        ngModel
+        name="size"
+      />
+
+      @if(form.controls['size'] && form.controls['size'].errors?.['required'] &&
+      form.controls['size'].dirty) {
+      <small class="text-red-600">Đây là thông tin bắt buộc</small>
+      }
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="CategoryID">
+        Loại sách
+      </label>
+      <select
+        [class.border-red-600]="form.controls['CategoryID'] && form.controls['CategoryID'].errors?.['required'] && form.controls['CategoryID'].dirty"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        name="CategoryID"
+        required
+        ngModel
+      >
+        <option value="">Chọn loại sách</option>
+        @for (v of category; track $index) {
+        <option value="{{ v.id }}">{{ v.name }}</option>
+        }
+      </select>
+
+      @if(form.controls['CategoryID'] &&
+      form.controls['CategoryID'].errors?.['required'] &&
+      form.controls['CategoryID'].dirty) {
+      <small class="text-red-600">Đây là thông tin bắt buộc</small>
+      }
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="img">
+        Message
+      </label>
+      <input
+        [class.border-red-600]="form.controls['img'] && form.controls['img'].errors?.['required'] && form.controls['img'].dirty"
+        class="border"
+        type="file"
+        name="img"
+        required
+        ngModel
+        #img
+      />
+
+      @if(form.controls['img'] && form.controls['img'].errors?.['required'] &&
+      form.controls['img'].dirty) {
+      <small class="text-red-600">Đây là thông tin bắt buộc</small>
+      }
+    </div>
+    <div class="flex items-center justify-center mb-4">
+      <button
+        [disabled]="!form.valid && true"
+        class="bg-purple-600 {{
+          !form.valid && 'opacity-65'
+        }} text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="submit"
+      >
+        Thêm
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,14 @@
+<div>
+  <p
+    class="text-purple-600 text-2xl font-medium uppercase border-b-2 border-purple-600"
+  >
+    Đặt hàng
+  </p>
+
+  <div class="flex flex-col">
+    @for (v of order; track $index) {
+    <app-card-order [data]="v"></app-card-order>
+
+    }
+  </div>
+</div>

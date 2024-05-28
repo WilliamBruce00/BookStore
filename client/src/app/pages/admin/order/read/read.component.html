@@ -1,0 +1,73 @@
+<div class="relative overflow-x-auto p-4">
+  <table
+    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+  >
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    >
+      <tr>
+        <th scope="col" class="px-6 py-3">Họ và tên</th>
+        <th scope="col" class="px-6 py-3">Số điện thoại</th>
+        <th scope="col" class="px-6 py-3">Địa chỉ</th>
+        <th scope="col" class="px-6 py-3">Ngày đặt</th>
+        <th scope="col" class="px-6 py-3">Tổng tiền</th>
+        <th scope="col" class="px-6 py-3">Trạng thái</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (v of orders; track $index) {
+      <tr class="bg-white dark:bg-gray-800">
+        <th
+          scope="row"
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          {{ v.fullname }}
+        </th>
+        <td class="px-6 py-4">{{ v.phone }}</td>
+        <td class="px-6 py-4">{{ v.address }}</td>
+        <td class="px-6 py-4">{{ v.createAt | dateFormant : "dd/mm/yyyy" }}</td>
+        <td class="px-6 py-4">{{ v.total | numberFormat }}</td>
+        <td class="px-6 py-4">
+          <select
+            name="status"
+            class="focus:outline-none"
+            #status
+            [value]="v.status"
+            [class.text-red-600]="v.status === 'Đang xử lý'"
+            [class.text-yellow-600]="v.status === 'Đang thực hiện'"
+            [class.text-green-600]="v.status === 'Hoàn thành'"
+            (change)="updateStatus(v.id, status)"
+          >
+            <option value="Đang xử lý" class="text-black">Đang xử lý</option>
+            <option value="Đang thực hiện" class="text-black">
+              Đang thực hiện
+            </option>
+            <option value="Hoàn thành" class="text-black">Hoàn thành</option>
+          </select>
+        </td>
+        <td>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6 cursor-pointer"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

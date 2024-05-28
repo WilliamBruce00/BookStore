@@ -1,0 +1,19 @@
+/* Thiết lập thanh cuộn dọc */
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Định dạng thanh cuộn */
+*::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Màu của "nút kéo" thanh cuộn */
+*::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Hiệu ứng hover của "nút kéo" */
+*::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

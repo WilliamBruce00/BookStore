@@ -1,0 +1,57 @@
+<div class="flex flex-col min-h-screen m-0">
+  <app-navbar></app-navbar>
+
+  <div class="flex-1">
+    <div class="w-4/5 m-auto flex my-3">
+      <div class="w-1/4 p-4 h-fit">
+        <ul class="flex flex-col text-lg">
+          <li
+            class="flex gap-3 items-center h-11 pl-3"
+            routerLinkActive="bg-purple-600 text-white"
+          >
+            <a routerLink="info" class="block w-full">
+              <i class="fa-solid fa-user mr-2"></i>
+              Thông tin tài khoản
+            </a>
+          </li>
+
+          <li
+            class="flex gap-3 items-center h-11 pl-3"
+            routerLinkActive="bg-purple-600 text-white"
+          >
+            <a routerLink="password" class="block w-full">
+              <i class="fa-solid fa-lock mr-2"></i>
+              Đổi mật khẩu
+            </a>
+          </li>
+
+          <li
+            class="flex gap-3 items-center h-11 pl-3"
+            routerLinkActive="bg-purple-600 text-white"
+          >
+            <a routerLink="order" class="block w-full">
+              <i class="fa-solid fa-truck mr-2"></i>
+              Đơn hàng
+            </a>
+          </li>
+
+          <li
+            class="flex gap-3 items-center h-11 pl-3 cursor-pointer"
+            (click)="logout()"
+          >
+            <p>
+              <i class="fa-solid fa-person-walking-arrow-right mr-2"></i>
+              Đăng xuất
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="w-3/4 p-4">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>
